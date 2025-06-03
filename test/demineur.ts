@@ -27,8 +27,7 @@ export class Demineur {
   }
 }
 
-/*déja pris en compte par le code mais ce test permet de savoir si 
-une case n'a pas de probleme avec prosieur mines voisines*/
+/*pas certain que ce test va rester sous cette forme*/
 
 //=================== TEST ===================//
 
@@ -50,4 +49,15 @@ Deno.test("ligne de 5 avec mine", () => {
 Deno.test("ligne de 5 avec 2 mines", () => {
   const demineur = new Demineur([[".","*",".","*","."]]);
   assertEquals(demineur.resoudre(), "1*2*1");
+});
+
+Deno.test("grille de 5x5 sans mines", () => {
+  const demineur = new Demineur([
+    [".",".",".",".","."],
+    [".",".",".",".","."],
+    [".",".",".",".","."],
+    [".",".",".",".","."],
+    [".",".",".",".","."]
+  ]);
+  assertEquals(demineur.resoudre(), "00000\n00000\n00000\n00000\n00000");
 });
