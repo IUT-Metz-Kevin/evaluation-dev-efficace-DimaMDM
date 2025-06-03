@@ -30,8 +30,7 @@ export class Demineur {
   }
 }
 
-/*pour le moment je garde la vérification des mines sur la ligne 
-mais je me contente juste de d'afficher en 2D*/
+/*All In, on rentre dans le dur, reste plus qu'a ajouter la verification des mines*/
 
 //=================== TEST ===================//
 
@@ -64,4 +63,15 @@ Deno.test("grille de 5x5 sans mines", () => {
     [".",".",".",".","."]
   ]);
   assertEquals(demineur.resoudre(), "00000\n00000\n00000\n00000\n00000");
+});
+
+Deno.test("grille de 5x5 avec mines", () => {
+  const demineur = new Demineur([
+    [".",".",".",".","."],
+    [".","*","*","*","."],
+    [".","*",".","*","."],
+    [".","*","*","*","."],
+    [".",".",".",".","."]
+  ]);
+  assertEquals(demineur.resoudre(), "12321\n2***2\n3*9*3\n2***2\n12321");
 });
