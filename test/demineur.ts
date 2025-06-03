@@ -7,16 +7,24 @@ export class Demineur {
     this.grille = grille;
   }
 
+  
   resoudre(): string {
-    if (this.grille.length === 1 && this.grille[0].length === 1 && this.grille[0][0] === ".") {
-      return "0";
+    const ligne = this.grille[0];
+    const longueur = ligne.length;
+    let resultat = "";
+
+    for (let x = 0; x < longueur; x++) {
+      if (ligne[x] === ".") {
+        resultat += "0";
+      }
     }
-    return "";
+    return resultat
   }
 }
 
-//j'ai tout fait en une fois pour les deux premier commit, vous n'avez rien vue :)
-
+/*avec ma méthode initial ça aurais rendu le code incroyablement lourd,
+je vais passer en brut force et verifier chacun des case voisin pour la suite.
+pour le moment en 1D car TDD...*/
 
 //=================== TEST ===================//
 
