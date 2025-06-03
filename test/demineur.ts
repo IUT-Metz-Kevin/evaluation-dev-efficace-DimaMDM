@@ -15,7 +15,17 @@ export class Demineur {
   }
 }
 
+//j'ai tout fait en une fois pour les deux premier commit, vous n'avez rien vue :)
+
+
+//=================== TEST ===================//
+
 Deno.test("case vide 0", () => {
   const demineur = new Demineur([["."]]);
   assertEquals(demineur.resoudre(), "0");
+});
+
+Deno.test("ligne de 5 sans mines", () => {
+  const demineur = new Demineur([[".",".",".",".","."]]);
+  assertEquals(demineur.resoudre(), "00000");
 });
