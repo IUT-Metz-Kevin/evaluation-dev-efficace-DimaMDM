@@ -14,15 +14,21 @@ export class Demineur {
     let resultat = "";
 
     for (let x = 0; x < longueur; x++) {
-      if (ligne[x] === ".") {
-        resultat += "0";
-      } 
+      if (ligne[x] === "*") {
+        resultat += "*";
+      } else {
+        let mines = 0;
+        if (x > 0 && ligne[x - 1] === "*") mines++;
+        if (x < longueur - 1 && ligne[x + 1] === "*") mines++;
+        resultat += mines.toString();
+      }
     }
     return resultat;
   }
 }
 
-//si il y a un bug avec le commit c'est parce que j'avais déja commencer a modifier ma fonction :/
+/*ici si la case est une mine on réecrit, sinon on vérifie la case a gauche et a droite,
+si ce sont des mines on rajoute 1 en fonction du nombre de mines*/
 
 //=================== TEST ===================//
 
