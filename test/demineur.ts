@@ -27,8 +27,8 @@ export class Demineur {
   }
 }
 
-/*ici si la case est une mine on réecrit, sinon on vérifie la case a gauche et a droite,
-si ce sont des mines on rajoute 1 en fonction du nombre de mines*/
+/*déja pris en compte par le code mais ce test permet de savoir si 
+une case n'a pas de probleme avec prosieur mines voisines*/
 
 //=================== TEST ===================//
 
@@ -45,4 +45,9 @@ Deno.test("ligne de 5 sans mines", () => {
 Deno.test("ligne de 5 avec mine", () => {
   const demineur = new Demineur([[".",".","*",".","."]]);
   assertEquals(demineur.resoudre(), "01*10");
+});
+
+Deno.test("ligne de 5 avec 2 mines", () => {
+  const demineur = new Demineur([[".","*",".","*","."]]);
+  assertEquals(demineur.resoudre(), "1*2*1");
 });
