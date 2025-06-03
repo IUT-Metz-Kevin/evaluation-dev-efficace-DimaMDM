@@ -16,15 +16,13 @@ export class Demineur {
     for (let x = 0; x < longueur; x++) {
       if (ligne[x] === ".") {
         resultat += "0";
-      }
+      } 
     }
-    return resultat
+    return resultat;
   }
 }
 
-/*avec ma méthode initial ça aurais rendu le code incroyablement lourd,
-je vais passer en brut force et verifier chacun des case voisin pour la suite.
-pour le moment en 1D car TDD...*/
+//si il y a un bug avec le commit c'est parce que j'avais déja commencer a modifier ma fonction :/
 
 //=================== TEST ===================//
 
@@ -36,4 +34,9 @@ Deno.test("case vide 0", () => {
 Deno.test("ligne de 5 sans mines", () => {
   const demineur = new Demineur([[".",".",".",".","."]]);
   assertEquals(demineur.resoudre(), "00000");
+});
+
+Deno.test("ligne de 5 avec mine", () => {
+  const demineur = new Demineur([[".",".","*",".","."]]);
+  assertEquals(demineur.resoudre(), "01*10");
 });
