@@ -13,21 +13,25 @@ export class Demineur {
     const longueur = ligne.length;
     let resultat = "";
 
-    for (let x = 0; x < longueur; x++) {
-      if (ligne[x] === "*") {
-        resultat += "*";
-      } else {
-        let mines = 0;
-        if (x > 0 && ligne[x - 1] === "*") mines++;
-        if (x < longueur - 1 && ligne[x + 1] === "*") mines++;
-        resultat += mines.toString();
+    for (let y = 0; y < this.grille.length; y++){
+      for (let x = 0; x < longueur; x++) {
+        if (ligne[x] === "*") {
+          resultat += "*";
+        } else {
+          let mines = 0;
+          if (x > 0 && ligne[x - 1] === "*") mines++;
+          if (x < longueur - 1 && ligne[x + 1] === "*") mines++;
+          resultat += mines.toString();
+        }
       }
+      resultat += "\n";
     }
-    return resultat;
+    return resultat.slice(0,-1);
   }
 }
 
-/*pas certain que ce test va rester sous cette forme*/
+/*pour le moment je garde la vérification des mines sur la ligne 
+mais je me contente juste de d'afficher en 2D*/
 
 //=================== TEST ===================//
 
