@@ -7,7 +7,20 @@ export class Demineur {
     this.grille = grille;
   }
 
-  
+  test(x:number,y:number): number{
+    let mines = 0;
+    for (let dx = -1; dx <=1;dx++){
+      for (let dy = -1; dy <=1;dy++){
+        if (dx === 0 && dy === 0)continue
+        const nx = x + dx;
+        const ny = y + dy;
+        if(
+          nx >= 0 && nx < this.grille.length-1 && ny >= 0 && ny < this.grille[0].length && this.grille[nx][ny] === "*") mines++;
+      }
+    }
+    return mines
+  }
+
   resoudre(): string {
     const longueur = this.grille[0].length;
     let resultat = "";
@@ -17,66 +30,7 @@ export class Demineur {
         if (this.grille[x][y] === "*") {
           resultat += "*";
         } else {
-          let mines = 0;
-          console.log(x)
-          console.log(y)
-          console.log();
-
-          if(x===0){
-            if(y===0){
-              if (this.grille[x+1][y]==="*") mines++;
-              if (this.grille[x][y+1]==="*") mines++;
-              if (this.grille[x+1][y+1]==="*") mines++;
-            }else if (y===this.grille.length-1){
-              if (this.grille[x+1][y]==="*") mines++;
-              if (this.grille[x][y-1]==="*") mines++;
-              if (this.grille[x+1][y-1]==="*") mines++;
-            }else{
-              if (this.grille[x+1][y]==="*") mines++;
-              if (this.grille[x][y+1]==="*") mines++;
-              if (this.grille[x+1][y+1]==="*") mines++;
-              if (this.grille[x][y-1]==="*") mines++;
-              if (this.grille[x+1][y-1]==="*") mines++;
-            }
-          }else if(x===longueur-1){
-            if(y===0){
-              if (this.grille[x-1][y]==="*") mines++;
-              if (this.grille[x-1][y+1]==="*") mines++;
-              if (this.grille[x][y+1]==="*") mines++;
-            }else if (y===this.grille.length-1){
-              if (this.grille[x-1][y]==="*") mines++;
-              if (this.grille[x-1][y-1]==="*") mines++;
-              if (this.grille[x][y-1]==="*") mines++;
-            }else{  
-              if (this.grille[x-1][y]==="*") mines++;   
-              if (this.grille[x-1][y+1]==="*") mines++;
-              if (this.grille[x][y+1]==="*") mines++;
-              if (this.grille[x-1][y-1]==="*") mines++;
-              if (this.grille[x][y-1]==="*") mines++;
-            }
-          }else if(y===0){  
-            if (this.grille[x-1][y]==="*") mines++;
-            if (this.grille[x+1][y]==="*") mines++; 
-            if (this.grille[x-1][y+1]==="*") mines++;
-            if (this.grille[x][y+1]==="*") mines++;
-            if (this.grille[x+1][y+1]==="*") mines++;
-          }else if (y===this.grille.length){
-            if (this.grille[x-1][y]==="*") mines++;
-            if (this.grille[x+1][y]==="*") mines++;
-            if (this.grille[x-1][y-1]==="*") mines++;
-            if (this.grille[x][y-1]==="*") mines++;
-            if (this.grille[x+1][y-1]==="*") mines++;
-          }else{
-            if (this.grille[x-1][y]==="*") mines++;
-            if (this.grille[x+1][y]==="*") mines++;
-            if (this.grille[x-1][y+1]==="*") mines++;
-            if (this.grille[x][y+1]==="*") mines++;
-            if (this.grille[x+1][y+1]==="*") mines++;
-            if (this.grille[x-1][y-1]==="*") mines++;
-            if (this.grille[x][y-1]==="*") mines++;
-            if (this.grille[x+1][y-1]==="*") mines++;
-          }
-          resultat += mines.toString();
+          resultat += this.test(x,y).toString();
         }
       }
       resultat += "\n";
@@ -84,6 +38,8 @@ export class Demineur {
     return resultat.slice(0,-1);
   }
 }
+
+//=================== DEMINAGE MANUEL ===================//
 
 const demineur = new Demineur([
     [".",".",".",".","."],
@@ -94,8 +50,9 @@ const demineur = new Demineur([
   ]);
 console.log(demineur.resoudre())
 
-/*All In, on rentre dans le dur, reste plus qu'a ajouter la verification des mines
-j'y suis aller comme un barbare, mais ça fonctionne, je vais voir si je peut optimiser tout ça*/
+/*pour remplacer les if else des enfer j'ai fait une fonction pour compter les mines
+j'avais oublier que compter -1 dans un tableau faisais tout planter :/ 
+je vous laisse en bonus de quoi expérimenter dans la console a quoi ressemble le démineur*/
 
 //=================== TEST ===================//
 
